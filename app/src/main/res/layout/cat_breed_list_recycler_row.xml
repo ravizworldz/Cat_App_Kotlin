@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
+        <variable name="catBreedListItem" type="com.test.synchronyapp.models.CatBreedListItem" />
+        <variable name="clickListener" type="com.test.synchronyapp.ui.adapter.ICatBreedListRowClickListener"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true"
+            android:layout_margin="@dimen/margin_10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() ->clickListener.onCatBreedRowClick(catBreedListItem)}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView android:id="@+id/catImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                    app:profileImage="@{TextUtils.isEmpty(catBreedListItem.image.url)?``:catBreedListItem.image.url}"
+                    />
+
+                <TextView android:id="@+id/textviewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:paddingEnd="15dp"
+                    android:textSize="20sp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{TextUtils.isEmpty(catBreedListItem.name)?``:catBreedListItem.name}"
+                   app:layout_constraintTop_toBottomOf="@+id/catImageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/black"/>
+
+                <TextView android:id="@+id/textviewOrigin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:paddingEnd="15dp"
+                    android:textSize="16sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{@string/cat_list_origin(TextUtils.isEmpty(catBreedListItem.origin)?``:catBreedListItem.origin)}"
+                    app:layout_constraintTop_toBottomOf="@id/textviewName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/purple_200"/>
+
+                <TextView android:id="@+id/textviewDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:textSize="14sp"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:text="@{catBreedListItem.description}"
+                    app:layout_constraintTop_toBottomOf="@id/textviewOrigin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:paddingEnd="20dp"
+                    android:layout_marginEnd="@dimen/margin_20dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:textColor="@color/gray_mid"
+                    android:paddingBottom="@dimen/margin_10dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
